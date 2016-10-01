@@ -52,7 +52,7 @@ def _config_user():
 		i += 1
 		print('Device {0}  = {1}'.format(i, _get_display_name(device)))
 	device_index = int(input('Device    : ')) - 1
-	device_id    = proxy.devices[device_index]['id']
+	device = proxy.devices[device_index]
 	proxy.sign_out()
 	print('')
 
@@ -63,7 +63,7 @@ def _config_user():
 	return {
 		'username': username,
 		'password': config.encode(password),
-		'id': device_id,
+		'id': device['id'],
 		'display_name': _get_display_name(device),
 		'button_pin': button_pin,
 		'led_pin': led_pin,
