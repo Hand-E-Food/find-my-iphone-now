@@ -62,7 +62,7 @@ def _config_user():
 	config.validate_pin(led_pin)
 	return {
 		'username': username,
-		'password': encode(password),
+		'password': config.encode(password),
 		'id': device_id,
 		'display_name': _get_display_name(device),
 		'button_pin': button_pin,
