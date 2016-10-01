@@ -44,6 +44,7 @@ def _config_user():
 	password   = input('Password  : ')
 	print('')
 
+	proxy = FindMyIphone()
 	proxy.sign_in(username, password)
 	proxy.init_devices()
 	i = 0
