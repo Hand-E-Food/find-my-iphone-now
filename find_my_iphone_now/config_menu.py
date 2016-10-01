@@ -57,9 +57,9 @@ def _config_user():
 	print('')
 
 	button_pin   = int(input('Button pin: '))
-	validate_pin(button_pin)
+	config.validate_pin(button_pin)
 	led_pin      = int(input('LED pin   : '))
-	validate_pin(led_pin)
+	config.validate_pin(led_pin)
 	return {
 		'username': username,
 		'password': encode(password),
