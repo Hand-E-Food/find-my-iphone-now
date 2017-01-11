@@ -31,9 +31,9 @@ class FindMyIphone:
 			self.username = username
 			self.signed_in = True
 		
-		except:
+		except Exception as ex:
 			self.sign_out()
-			raise
+			raise #type(ex)(str(ex) + ', ResponseHeaders: ' + str(response.headers)).with_traceback(sys.exc_info()[2])
 	
 	
 	def sign_out(self):
