@@ -1,5 +1,6 @@
 import json
 import requests
+import sys
 
 
 class InvalidStateError(Exception):
@@ -29,7 +30,7 @@ class FindMyIphone:
 			self.base_url = 'https://{0}/fmipservice/device/{1}/'.format(response.headers['X-Apple-MMe-Host'], response.headers['X-Apple-MMe-Scope'])
 			self.username = username
 			self.signed_in = True
-			
+		
 		except:
 			self.sign_out()
 			raise
@@ -117,15 +118,3 @@ class FindMyIphone:
 	
 	def _load_devices(self, response):
 		self.devices = json.loads(response.text)['content']
-
-
-def main():
-	proxy = FindMyIphone()
-	proxy.sign_in(input('Username: '), input('Password: '))
-	#proxy.init_devices()
-	proxy.play_sound('kbdwxWByVqSp4v+4i986feFOQnN+iBxkIugLRyjmJiUsUKZnkgGJouHYVNSUzmWV', 'You found me! Now you go hide.')
-	proxy.sign_out()
-
-	
-if __name__ == '__main__':
-	main()
