@@ -27,13 +27,13 @@ class FindMyIphone:
 			if response.status_code >= 400:
 				response.raise_for_status()
 			
-			self.base_url = 'https://{0}/fmipservice/device/{1}/'.format(response.headers['X-Apple-MMe-Host'], response.headers['X-Apple-MMe-Scope'])
+			self.base_url = 'https://fmipmobile.icloud.com/fmipservice/device/{0}/'.format(username)
 			self.username = username
 			self.signed_in = True
 		
-		except Exception as ex:
+		except:
 			self.sign_out()
-			raise #type(ex)(str(ex) + ', ResponseHeaders: ' + str(response.headers)).with_traceback(sys.exc_info()[2])
+			raise
 	
 	
 	def sign_out(self):
