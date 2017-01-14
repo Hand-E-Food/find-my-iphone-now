@@ -21,14 +21,16 @@ class FindMyIphone:
 	def sign_in(self, username, password):
 		try:
 			self.auth = requests.auth.HTTPBasicAuth(username, password)
+			self.username = username
+			self.base_url = 'https://fmipmobile.icloud.com/fmipservice/device/{0}/'.format(username)
 			
-			url = 'https://fmipmobile.icloud.com/fmipservice/device/{0}/initClient'.format(username)
-			response = self._get(url)
+			response = self._get(self.base_url + 'initClient')
 			if response.status_code >= 400:
 				response.raise_for_status()
 			
-			self.base_url = 'https://fmipmobile.icloud.com/fmipservice/device/{0}/'.format(username)
-			self.username = username
+			if all (key in response.headers for key in ('X-Apple-MMe-Host', 'X-Apple-MMe-Scope')):
+				self.base_url = 'https://{0}/fmipservice/device/{1}/'.format(response.headers['X-Apple-MMe-Host'], response.headers['X-Apple-MMe-Scope'])
+			
 			self.signed_in = True
 		
 		except:
