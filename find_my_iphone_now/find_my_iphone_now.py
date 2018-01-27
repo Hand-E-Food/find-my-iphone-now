@@ -23,16 +23,8 @@ class IphoneUser:
 		self.running = True
 		self.state = self.STATE_IDLE
 		self.user = user
-		GPIO.setup(
-			user['button_pin'],
-			GPIO.IN,
-			pull_up_down = GPIO.PUD_UP
-		)
-		GPIO.setup(
-			user['led_pin'],
-			GPIO.OUT,
-			initial = self.LED_OFF
-		)
+		GPIO.setup(user['button_pin'], GPIO.IN , pull_up_down = GPIO.PUD_UP )
+		GPIO.setup(user['led_pin'   ], GPIO.OUT, initial      = self.LED_OFF)
 	
 	
 	def run(self):
@@ -55,6 +47,9 @@ class IphoneUser:
 					time.sleep(5.0)
 					self._set_led(self.LED_OFF)
 					self.state = self.STATE_IDLE
+				
+				while self._is_button_pressed(500):
+					pass
 	
 	
 	def stop(self):
